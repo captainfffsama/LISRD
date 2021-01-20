@@ -1,3 +1,4 @@
+weights/
 **/__pycache__/
 lisrd/third_party/super_point_magic_leap/__pycache__/
 pyrightconfig.json

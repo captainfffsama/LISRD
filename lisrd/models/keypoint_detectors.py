@@ -17,7 +17,9 @@ def SIFT_detect(img, nfeatures=1500, contrastThreshold=0.04):
 
 
 def SP_detect(img, kp_net):
-    """ Compute SuperPoint feature points. """
+    """ Compute SuperPoint feature points. 
+        注意这里输出的也是y,x,p
+    """
     keypoints, _, _ = kp_net.run(img.astype(np.float32) / 255.)
     keypoints = keypoints.squeeze()[[1, 0, 2], :].transpose()
     return keypoints

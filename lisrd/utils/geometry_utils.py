@@ -75,7 +75,11 @@ def get_lisrd_desc_dist_numpy(desc0, desc1, meta_desc0, meta_desc1):
 
 def extract_descriptors(keypoints, descriptors, meta_descriptors, img_size):
     """ Sample descriptors and meta descriptors at keypoints positions.
-        This assumes a batch_size of 1. """
+        This assumes a batch_size of 1. 
+        注意输入的kp是y,x顺序
+        根据点的位置提取对应点位置的描述符和元描述符
+    """
+    # 这步操作之后,y,x被调换回来
     grid_points = keypoints_to_grid(keypoints, img_size)
 
     # Extract the local descriptors
@@ -102,15 +106,22 @@ def lisrd_matcher(desc1, desc2, meta_desc1, meta_desc2):
     """ Nearest neighbor matcher for LISRD. 
         这里是计算两张图片得到的meta_desc1,meta_desc2之间两两相乘,然后再分别在4个描述符中求softmax,然后将得到的权值和原始描述符相乘
         然后将原始描述符的加权和作为选择点的的依据
+        最后输出的matches x轴上第一位表示Ia图片中选中的点的索引,第二位表示Ib中应该匹配上的点的索引
+
+        注意这里输入的点的排列是y,x
     """
     device = desc1.device
     # 这里求取meta1和meta2中两两相乘
     desc_weights = torch.einsum('nid,mid->nim', (meta_desc1, meta_desc2))
+    print(desc_weights.shape)
     del meta_desc1, meta_desc2
+    # 在四个描述符之间求softmax
     desc_weights = func.softmax(desc_weights, dim=1)
+    import ipdb; ipdb.set_trace()
     desc_sims = torch.einsum('nid,mid->nim', (desc1, desc2)) * desc_weights
     del desc1, desc2, desc_weights
     desc_sims = torch.sum(desc_sims, dim=1)
+    # 以下三句检查nn12和nn21中点的相似度最高的点是一一对应的
     nn12 = torch.max(desc_sims, dim=1)[1]
     nn21 = torch.max(desc_sims, dim=0)[1]
     ids1 = torch.arange(desc_sims.shape[0], dtype=torch.long, device=device)

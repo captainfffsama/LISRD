@@ -35,9 +35,10 @@ python -m lisrd.experiment train lisrd/configs/lisrd.yaml ~/Documents/experiment
 Use the config file `lisrd/configs/lisrd_sift.yaml` to instead train LISRD-SIFT that chooses between SIFT and Upright SIFT descriptors.
 
 ### Pretrained models
+预训练模型可以从[地址1](https://dsm.chiebot.com:10000/d/f/599266146044130163)或[百度云](https://pan.baidu.com/s/1ygdCF2IgdTpPa_9NmNslEA) 提取码: 52yp
 
 We provide two pretrained models:
-- [lisrd_aachen](weights/lisrd_aachen.pth): version of LISRD used in the paper, trained on the [MS COCO](https://cocodataset.org) dataset, [Multi-Illumination Images in the Wild](https://projects.csail.mit.edu/illumination/) and [Aachen dataset images augmented with style-transfer or with optical flow information](https://github.com/naver/r2d2).
+- [lisrd_aachen](): version of LISRD used in the paper, trained on the [MS COCO](https://cocodataset.org) dataset, [Multi-Illumination Images in the Wild](https://projects.csail.mit.edu/illumination/) and [Aachen dataset images augmented with style-transfer or with optical flow information](https://github.com/naver/r2d2).
 - [lisrd_vidit](weights/lisrd_vidit.pth): new version of LISRD, trained on the [MS COCO](https://cocodataset.org) dataset, [Multi-Illumination Images in the Wild](https://projects.csail.mit.edu/illumination/) and the [Virtual Image Dataset for Illumination Transfer (VIDIT)](https://github.com/majedelhelou/VIDIT). The results below are obtained using this model.
 
 ### How to use it
