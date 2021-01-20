@@ -99,8 +99,12 @@ def extract_descriptors(keypoints, descriptors, meta_descriptors, img_size):
 
 
 def lisrd_matcher(desc1, desc2, meta_desc1, meta_desc2):
-    """ Nearest neighbor matcher for LISRD. """
+    """ Nearest neighbor matcher for LISRD. 
+        这里是计算两张图片得到的meta_desc1,meta_desc2之间两两相乘,然后再分别在4个描述符中求softmax,然后将得到的权值和原始描述符相乘
+        然后将原始描述符的加权和作为选择点的的依据
+    """
     device = desc1.device
+    # 这里求取meta1和meta2中两两相乘
     desc_weights = torch.einsum('nid,mid->nim', (meta_desc1, meta_desc2))
     del meta_desc1, meta_desc2
     desc_weights = func.softmax(desc_weights, dim=1)

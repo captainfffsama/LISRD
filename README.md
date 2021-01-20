@@ -5,7 +5,7 @@ This repository contains the implementation of the paper: [Online Invariance Sel
 LISRD offers the possibility to leverage descriptors with different invariances (e.g. invariant or variant to rotation and/or illumination) and to perform an online selection of the most adapted invariance when matching two images.
 
 The following shows for example matches predicted with LISRD-SIFT that selects descriptors between SIFT (rotation invariant) and Upright SIFT (rotation variant):
-![demo_lisrd_sift](assets/videos/demo_lisrd_sift.gif)
+![demo_lisrd_sift](https://pic.chiebot.com:10000/images/2021/01/20/demo_lisrd_sift.gif)
 
 ## Usage
 
@@ -142,7 +142,7 @@ Comparison to the state of the art on the RDNIM dataset, using SuperPoint keypoi
   </tr>
 </table>
 
-![mma_rdnim](assets/results/mma_rdnim.png)
+![mma_rdnim](https://pic.chiebot.com:10000/images/2021/01/20/mma_rdnim.png)
 
 ## Bibtex
 
