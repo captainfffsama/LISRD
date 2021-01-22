@@ -117,7 +117,6 @@ def lisrd_matcher(desc1, desc2, meta_desc1, meta_desc2):
     del meta_desc1, meta_desc2
     # 在四个描述符之间求softmax
     desc_weights = func.softmax(desc_weights, dim=1)
-    import ipdb; ipdb.set_trace()
     desc_sims = torch.einsum('nid,mid->nim', (desc1, desc2)) * desc_weights
     del desc1, desc2, desc_weights
     desc_sims = torch.sum(desc_sims, dim=1)
